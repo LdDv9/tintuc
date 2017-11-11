@@ -1,0 +1,47 @@
+@extends('admin.layouts.index')
+
+@section('content')
+ <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Loại Tin:
+                            <small>{{ $loaitin ->Ten }}</small>
+                        </h1>
+                    </div>
+                    <div class="col-lg-12">
+                        <h2 class="">Thể Loại:
+                            <small>{{ $loaitin ->theloai->Ten }}</small>
+                        </h2>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                    <div class="col-lg-7" style="padding-bottom:120px">
+                        <form action="{{ action('LoaiTinController@update',$id) }}" method="POST">
+                            {{ method_field('PUT') }}
+                            {{ csrf_field() }}
+                            @include('notis.success')
+                            @include('notis.errors')
+                            <div class="form-group">
+                                <label>Tên Mới</label>
+                                <input class="form-control" name="txtName" placeholder="Nhập Tên Mới" />
+                            </div>
+                            <div class="form-group">
+                                <label>Chọn Thể Loại Mới</label>
+
+                                <select class="form-control" name="theloai">
+                                    @foreach($theloai as $list)
+                                    <option value="{{ $list->id }}">{{ $list->Ten }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                           
+                            <button type="submit" class="btn btn-default">Sửa Loại Tin</button>
+                            <button type="reset" class="btn btn-default">Reset</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+ </div>
+@endsection
